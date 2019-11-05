@@ -7,10 +7,27 @@
 //
 
 import SwiftUI
+import WebKit
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello World")
+        NavigationView {
+            VStack {
+                WebKit(request: URLRequest(url: URL(string: "https://www.apple.com/uk/")!))
+            }.navigationBarTitle("WebKit")
+        }
+    }
+}
+
+struct WebKit: UIViewRepresentable {
+    let request: URLRequest
+    
+    func makeUIView(context: UIViewRepresentableContext<WebKit>) -> WKWebView {
+        return WKWebView()
+    }
+    
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        uiView.load(request)
     }
 }
 
